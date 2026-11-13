@@ -44,7 +44,7 @@ def Signup():
         # Adds to log of tokens used for email validation and sets their IssuedTime for timestamp ordering
 
         try:
-            Gmail.sendmail('DummyEmailNEA@gmail.com', JsonData['email'], f'Click the following link to authenticate your account :\n\nhttps://server-side-maze-app.onrender.com/{Token}')
+            Gmail.sendmail('DummyEmailNEA@gmail.com', JsonData['email'], f'Click the following link to authenticate your account :\n\nhttp://{Host}:5000/EmailAuth/{Token}')
             # Sends email with authentication link to user address
 
         except:
@@ -248,14 +248,18 @@ def NoPage(Error):
 
 
 
-UsersTimstamp = datetime.now(timezone.utc)  #  timezone.uts to convert local time into utc
-# Timestamp ordering only exists for users as no other table requires unique, user-enterable data
+if __name__ == '__main__':
+    UsersTimstamp = datetime.now(timezone.utc)  #  timezone.uts to convert local time into utc
+    # Timestamp ordering only exists for users as no other table requires unique, user-enterable data
 
-Gmail = SMTP_SSL('smtp.gmail.com', 465)  #  Connects to gmails port
-Gmail.login('dummyemailnea@gmail.com', 'zoid kzzh fysu fhng')
-# Python scripts arent secure so gmail requires 16 char app app password
+    Gmail = SMTP_SSL('smtp.gmail.com', 465)  #  Connects to gmails port
+    Gmail.login('dummyemailnea@gmail.com', 'zoid kzzh fysu fhng')
+    # Python scripts arent secure so gmail requires 16 char app app password
 
-TokenToUserDict = {}
-
-EmailTokenDict = {}
+    TokenToUserDict = {}
+    EmailTokenDict = {}
+    Host = '127.0.0.1'  # Set host = '0.0.0.0' or public domain at runtime
+    App.run(host = Host, port = 5000)
+# Whenever file runs directly, it creates starting timestamps for concurrent access
+# Creates temporary tokens for users and executes flask
 

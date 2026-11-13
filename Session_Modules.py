@@ -2,7 +2,7 @@ from sqlalchemy import create_engine, Column, ForeignKey, Integer, String, Boole
 from sqlalchemy.orm import declarative_base, sessionmaker
 
 
-engine = create_engine('sqlite:///MazeDatabase.db')
+engine = create_engine('sqlite:///Database/MazeDatabase.db')
 # Creates connection to database file usign SQLite
 
 Base = declarative_base()
