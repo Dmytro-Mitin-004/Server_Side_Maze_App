@@ -5,6 +5,10 @@ from flask import Flask, jsonify, request, render_template
 from Session_Modules import Session, Users
 from sqlalchemy import func
 from secrets import token_urlsafe
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 
 App = Flask(__name__)
@@ -44,7 +48,7 @@ def Signup():
         # Adds to log of tokens used for email validation and sets their IssuedTime for timestamp ordering
 
         try:
-            Gmail.sendmail('DummyEmailNEA@gmail.com', JsonData['email'], f'Click the following link to authenticate your account :\n\nhttp://{Host}:5000/EmailAuth/{Token}')
+            Gmail.sendmail(os.getenv('GMAIL_ADDRESS'), JsonData['email'], f'Click the following link to authenticate your account :\n\nhttp://{Host}:5000/EmailAuth/{Token}')
             # Sends email with authentication link to user address
 
         except:
@@ -253,7 +257,7 @@ if __name__ == '__main__':
     # Timestamp ordering only exists for users as no other table requires unique, user-enterable data
 
     Gmail = SMTP_SSL('smtp.gmail.com', 465)  #  Connects to gmails port
-    Gmail.login('dummyemailnea@gmail.com', 'zoid kzzh fysu fhng')
+    Gmail.login(os.getenv('GMAIL_ADDRESS'), os.getenv('GMAIL_APP_PASSWORD'))
     # Python scripts arent secure so gmail requires 16 char app app password
 
     TokenToUserDict = {}
