@@ -28,33 +28,36 @@ Flask REST API backend for the Mazenta maze platform. Handles email-verified use
 git clone https://github.com/Trexicurity07/Server_Side_Maze_App.git
 cd Server_Side_Maze_App
 pip install -r requirements.txt
+```
+
+### 1. Create a `.env` file
+
+Copy `.env.example` to `.env` and fill in your Gmail credentials:
+
+```
+GMAIL_ADDRESS=your-email@gmail.com
+GMAIL_APP_PASSWORD=xxxx xxxx xxxx xxxx
+```
+
+**Getting a Gmail App Password:**
+1. Enable 2-Step Verification on your Google account (required)
+2. Go to [Google Account → Security → App passwords](https://support.google.com/accounts/answer/185833)
+3. Create a new app password — select app: Mail, device: Other
+4. Copy the generated 16-character password into `GMAIL_APP_PASSWORD`
+
+> This is needed because Gmail blocks plain password login from scripts. The app password is specific to this use — it does not give access to your full account.
+
+### 2. Run
+
+```bash
 python Server_Side_Flask.py
 ```
 
-The server starts on `http://127.0.0.1:5000`.
+The server starts on `http://127.0.0.1:5000`. A fresh SQLite database is created automatically at `Database/MazeDatabase.db` on first run.
 
-A demo database (`Database/MazeDatabase.db`) is included with pre-seeded users and mazes — no database setup required.
+### Skipping email verification
 
-### Email verification
-
-A demo Gmail account is pre-configured in `Server_Side_Flask.py`. New signups receive a verification link automatically. If you want to use your own Gmail account instead:
-
-1. Enable 2FA on your Google account
-2. Generate an [App Password](https://support.google.com/accounts/answer/185833) (Mail)
-3. Replace the credentials in `Server_Side_Flask.py` near `Gmail.login(...)`:
-   ```python
-   Gmail.login('your-email@gmail.com', 'your-16-char-app-password')
-   ```
-
-You can skip signup entirely and use the pre-seeded demo accounts below.
-
-## Demo accounts
-
-| Username | Password |
-|---|---|
-| alicechen | pass1234 |
-| bencarter | pass1234 |
-| claraosei | pass1234 |
+The database is not committed to the repo — a fresh SQLite file is created on first run with no accounts. To test without going through email verification, set up Gmail as above and register once, or use a tool like [Mailpit](https://mailpit.axllent.org/) to intercept the verification email locally without a real Gmail account.
 
 ## API reference
 
