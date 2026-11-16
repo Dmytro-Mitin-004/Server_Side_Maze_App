@@ -57,7 +57,15 @@ The server starts on `http://127.0.0.1:5000`. A fresh SQLite database is created
 
 ### Skipping email verification
 
-The database is not committed to the repo — a fresh SQLite file is created on first run with no accounts. To test without going through email verification, set up Gmail as above and register once, or use a tool like [Mailpit](https://mailpit.axllent.org/) to intercept the verification email locally without a real Gmail account.
+A demo database (`Database/MazeDatabase.db`) is included with pre-seeded accounts and mazes — no registration required. Use the demo credentials below to log straight in.
+
+## Demo accounts
+
+| Username | Password |
+|---|---|
+| alicechen | pass1234 |
+| bencarter | pass1234 |
+| claraosei | pass1234 |
 
 ## API reference
 
